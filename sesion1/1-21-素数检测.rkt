@@ -1,0 +1,35 @@
+#lang sicp
+#|暴力获取素数的表达式|#
+(define (smallest-divisor n)
+  (find-divisor n 2))
+(define (find-divisor n test)
+  (cond ((> (suqare test) n) n)
+        ((divides? test n) test)
+        (else (find-divisor n (+ 1 test)))
+    ))
+(define (divides? a b)
+  (= (remainder b a) 0))
+(define (suqare a)
+  (* a a))
+(define (prime? n)
+  (= n (smallest-divisor n)))
+
+#|费马检查|#
+(define (expmod base exp m)
+  (cond ((= 0 exp) 1)
+        ((even? exp) (remainder (suqare (expmod base (/ exp 2) m)) m))
+        (else (remainder (* base (expmod base (- exp 1) m)) m))
+        )
+)
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (fast-prime n times)
+  (cond
+    ((= times 0) true)
+    ((fermat-test n) (fast-prime n (- times 1)))
+    (else false)
+  )
+)
