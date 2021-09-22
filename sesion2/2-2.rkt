@@ -1,0 +1,25 @@
+#lang sicp
+(define (make-segment x y)
+  (cons x y))
+(define (start-segment x)
+  (car x))
+(define (end-segment x)
+  (cdr x))
+
+(define (make-point x y)
+  (cons x y))
+(define (x-point x)
+  (car x))
+(define (y-point x)
+  (cdr x))
+
+
+(define (minpoint-segment t)
+    (define (half x y)
+    (define (f a b) (/ (+ a b) 2))
+    (make-point (f (x-point x) (x-point y))
+                (f (y-point x) (y-point y))
+    )
+  )
+  (half (start-segment t) (end-segment t))
+)
