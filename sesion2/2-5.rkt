@@ -1,3 +1,4 @@
+#lang sicp
 (define (f a b)
     (cons (m 2 a) (m 3 b))
 )
@@ -15,8 +16,10 @@
     (define (inc x)
         (+ x 1)
     )
-    (cond ((0 = y) x)
-        ((= 0 (remainder y)) (* x x) (/ y 2))
-        (else (* x (m x (dnc y))))
+    (cond
+      ((= 0 y) 1)
+      ((= 1 y) x)
+      ((= 0 (remainder y 2)) (m (* x x) (/ y 2)))
+      (else (* x (m x (dnc y))))
     )
 )
